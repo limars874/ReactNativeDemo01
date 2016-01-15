@@ -31,9 +31,9 @@ var SecondPageComponent = React.createClass({
 
     render: function() {
         return (
-            <View>
+            <View sytle ={styles.base}>
                 <TouchableOpacity onPress={this._pressButton}>
-                    <Text style={styles.mybutton}>点我跳回去</Text>
+                    <Text style={styles.mybutton}>我是第二层，点我跳回第一层</Text>
                 </TouchableOpacity>
             </View>
         );
@@ -41,10 +41,15 @@ var SecondPageComponent = React.createClass({
 });
 
 var styles = StyleSheet.create({
+    base:{
+        flex:1,
+        height:80,
+        width:80,
+    },
     mybutton:{
         flex:1,
         backgroundColor:'blue',
-        padding:50,
+        padding:40,
         borderWidth:2,
         color:'white'
     }

@@ -14,6 +14,10 @@ var {
     } = React;
 
 var SecondPageComponent = require('./SecondPageComponent');
+var layoutTest01 = require('./layoutTest01');
+var layoutTest02 = require('./layoutTest02');
+var layoutTest03 = require('./layoutTest03');
+
 
 var FirstPageComponent = React.createClass({
     getInitialState: function() {
@@ -36,25 +40,85 @@ var FirstPageComponent = React.createClass({
             })
         }
     },
+    _pressButton1: function() {
+        const { navigator } = this.props;
+
+        if(navigator) {
+            navigator.push({
+                name: 'layoutTest01',
+                component: layoutTest01,
+            })
+        }
+    },
+    _pressButton2: function() {
+        const { navigator } = this.props;
+
+        if(navigator) {
+            navigator.push({
+                name: 'layoutTest02',
+                component: layoutTest02,
+            })
+        }
+    },
+    _pressButton3: function() {
+        const { navigator } = this.props;
+
+        if(navigator) {
+            navigator.push({
+                name: 'layoutTest03',
+                component: layoutTest03,
+            })
+        }
+    },
 
     render: function() {
         return (
-            <View>
-                <TouchableOpacity onPress={this._pressButton}>
-                    <Text style = {styles.mybutton}>点我跳转</Text>
-                </TouchableOpacity>
+            <View style={styles.all}>
+                <View style ={styles.base}>
+                    <TouchableOpacity onPress={this._pressButton}>
+                        <Text style = {styles.mybutton}>点我跳转到第二层</Text>
+                    </TouchableOpacity>
+                </View>
+                <View style ={styles.base}>
+                    <TouchableOpacity onPress={this._pressButton1}>
+                        <Text style = {styles.mybutton}>点我跳转布局测试1</Text>
+                    </TouchableOpacity>
+                </View>
+                <View style ={styles.base}>
+                    <TouchableOpacity onPress={this._pressButton2}>
+                        <Text style = {styles.mybutton}>点我跳转布局测试2</Text>
+                    </TouchableOpacity>
+                </View>
+                <View style ={styles.base}>
+                    <TouchableOpacity onPress={this._pressButton3}>
+                        <Text style = {styles.mybutton}>点我跳转布局测试3</Text>
+                    </TouchableOpacity>
+                </View>
+
             </View>
+
+
         );
     }
 });
 
 
 var styles = StyleSheet.create({
+    all:{
+      marginTop:20,
+    },
+    base:{
+        flex:1,
+        backgroundColor:'green',
+    },
+
     mybutton:{
         flex:1,
+        height:40,
+        borderWidth:1,
         backgroundColor:'red',
-        padding:50,
-        borderWidth:2,
+        color:'white',
+        lineHeight:30,
     }
 })
 
