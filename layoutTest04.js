@@ -2,7 +2,11 @@
  Created by yili on 1/14/16.
  继续抄袭美团界面
  实现自定义组件（略微少点view的重复度）
- 实现2个较为重复view内容的自定义组件，用props传image的uri属性注意要用两大括号。
+ 实现2个较为重复view内容的自定义组件，用props传image的uri属性注意大括号数量。
+
+ 定义一个数组把数据链接都丢进去，在组件那边直接引用，引用时需要用大括号包住。
+
+
 
  **/
 
@@ -19,11 +23,24 @@ var {
     } = React;
 
 
+var ItemData1 = [
+    {name:'美食',imgurl:'http://ms0.meituan.net/touch/img/icon-sm.png'},
+    {name:'电影',imgurl:'http://ms0.meituan.net/touch/img/icon-sm.png'},
+    {name:'酒店',imgurl:'http://ms0.meituan.net/touch/img/icon-sm.png'},
+    {name:'KTV',imgurl:'http://ms0.meituan.net/touch/img/icon-sm.png'},
+    {name:'今日新单',imgurl:'http://ms0.meituan.net/touch/img/icon-sm.png'},
+    {name:'丽人',imgurl:'http://ms0.meituan.net/touch/img/icon-sm.png'},
+    {name:'周边游',imgurl:'http://ms0.meituan.net/touch/img/icon-sm.png'},
+    {name:'休闲娱乐',imgurl:'http://ms0.meituan.net/touch/img/icon-sm.png'},
+];
+
+var test = ItemData1[0]
+
 var ListItemStyle1 = React.createClass({
     render: function(){
         return(
             <View style={styles.headitem}>
-                <Image style={[styles.headitemimg,]} source={this.props.imgurl}></Image>
+                <Image style={[styles.headitemimg,]} source={{uri:this.props.imgurl}}></Image>
                 <Text style={styles.headitemtext}>{this.props.name}</Text>
             </View>
         );
@@ -55,16 +72,16 @@ var layoutTest03 = React.createClass({
             <View style={{flex:1,paddingTop:20,backgroundColor:'#f0efed'}}>
                 <View style ={[styles.mthead,styles.mtcolumn,styles.mtflexone]}>
                     <View style={[styles.mtrow,styles.mtflexone]}>
-                        <ListItemStyle1 imgurl={{uri:'http://ms0.meituan.net/touch/img/icon-sm.png'}} name="美食" />
-                        <ListItemStyle1 imgurl={{uri:'http://ms0.meituan.net/touch/img/icon-sm.png'}} name="电影" />
-                        <ListItemStyle1 imgurl={{uri:'http://ms0.meituan.net/touch/img/icon-sm.png'}} name="酒店" />
-                        <ListItemStyle1 imgurl={{uri:'http://ms0.meituan.net/touch/img/icon-sm.png'}} name="Ktv" />
+                        <ListItemStyle1 imgurl= {ItemData1[0].imgurl} name={ItemData1[0].name} />
+                        <ListItemStyle1 imgurl={ItemData1[1].imgurl} name={ItemData1[1].name} />
+                        <ListItemStyle1 imgurl={ItemData1[2].imgurl} name={ItemData1[2].name} />
+                        <ListItemStyle1 imgurl={ItemData1[3].imgurl} name={ItemData1[3].name} />
                     </View>
                     <View style={[styles.mtrow,styles.mtflexone,]}>
-                        <ListItemStyle1 imgurl={{uri:'http://ms0.meituan.net/touch/img/icon-sm.png'}} name="今日新单" />
-                        <ListItemStyle1 imgurl={{uri:'http://ms0.meituan.net/touch/img/icon-sm.png'}} name="丽人" />
-                        <ListItemStyle1 imgurl={{uri:'http://ms0.meituan.net/touch/img/icon-sm.png'}} name="周边游" />
-                        <ListItemStyle1 imgurl={{uri:'http://ms0.meituan.net/touch/img/icon-sm.png'}} name="休闲娱乐" />
+                        <ListItemStyle1 imgurl={ItemData1[4].imgurl} name={ItemData1[4].name} />
+                        <ListItemStyle1 imgurl={ItemData1[5].imgurl} name={ItemData1[5].name} />
+                        <ListItemStyle1 imgurl={ItemData1[6].imgurl} name={ItemData1[6].name} />
+                        <ListItemStyle1 imgurl={ItemData1[7].imgurl} name={ItemData1[7].name} />
                     </View>
                 </View>
                 <View style ={[styles.mtmid,styles.mtrow,styles.mtflexone]}>
