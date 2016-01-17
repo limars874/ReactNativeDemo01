@@ -17,6 +17,7 @@ var SecondPageComponent = require('./SecondPageComponent');
 var layoutTest01 = require('./layoutTest01');
 var layoutTest02 = require('./layoutTest02');
 var layoutTest03 = require('./layoutTest03');
+var layoutTest04 = require('./layoutTest04');
 
 
 var FirstPageComponent = React.createClass({
@@ -70,6 +71,16 @@ var FirstPageComponent = React.createClass({
             })
         }
     },
+    _pressButton4: function() {
+        const { navigator } = this.props;
+
+        if(navigator) {
+            navigator.push({
+                name: 'layoutTest04',
+                component: layoutTest04,
+            })
+        }
+    },
 
     render: function() {
         return (
@@ -92,6 +103,11 @@ var FirstPageComponent = React.createClass({
                 <View style ={styles.base}>
                     <TouchableOpacity onPress={this._pressButton3}>
                         <Text style = {styles.mybutton}>点我跳转布局测试3</Text>
+                    </TouchableOpacity>
+                </View>
+                <View style ={styles.base}>
+                    <TouchableOpacity onPress={this._pressButton4}>
+                        <Text style = {styles.mybutton}>点我跳转布局测试4</Text>
                     </TouchableOpacity>
                 </View>
 
