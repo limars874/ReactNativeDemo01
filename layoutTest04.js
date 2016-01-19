@@ -34,6 +34,9 @@ var ItemData1 = [
     {name:'休闲娱乐',imgurl:'http://ms0.meituan.net/touch/img/icon-sm.png'},
 ];
 
+
+
+
 var test = ItemData1[0]
 
 var ListItemStyle1 = React.createClass({
