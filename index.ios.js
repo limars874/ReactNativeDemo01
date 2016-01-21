@@ -15,7 +15,7 @@ var FirstPageComponent = require('./FirstPageComponent');
 
 var MyProject = React.createClass({
     render: function() {
-        var defaultName = 'FirstPageComponent';
+        var defaultName = 'FirstPageComponent1';
         var defaultComponent = FirstPageComponent;
         return (
             <Navigator

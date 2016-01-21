@@ -11,7 +11,7 @@
  实现iconfont功能
  https://github.com/corymsmith/react-native-icons
  按照说明：首先npm install，然后在xcode里面把ReactNativeIcons.xcodeproj添加到Libraries，然后把libReactNativeIcons.a添加到Build Phases ➜ Link Binary With Libraries里面，再把所需要到字体，添加到Copy Bundle Resources（这个就在刚才那个link选项虾面）
- 我现在只加了2个，一个fontawesome（http://fortawesome.github.io/Font-Awesome/icons/），一个ionicons（http://ionicons.com/），用法如下：name='fontawesome|facebook-square'或者name='ion|ios-home-outline'
+ 我现在只加了2个，一个fontawesome（  http://fortawesome.github.io/Font-Awesome/icons/  ），一个ionicons（  http://ionicons.com/  ），用法如下：name='fontawesome|facebook-square'或者name='ion|ios-home-outline'
  <Icon
  name={this.props.iconname}
  size={25}
@@ -105,12 +105,12 @@ var ListItemStyle1 = React.createClass({
             <TouchableOpacity
                 onPress={()=>this.pressonguess(this.props.name)}
                 style={[{width:screenW/4,height:80,alignItems:'center',justifyContent:'center'}]}>
-                <View>
+                <View style={{alignItems:'center',justifyContent:'center'}}>
                     <Icon
                         name={this.props.iconname}
                         size={25}
                         color='white'
-                        style={{backgroundColor:this.props.iconbackcolor,width:40,height:40,borderRadius:20,alignItems:'center',justifyContent:'center'}}
+                        style={{backgroundColor:this.props.iconbackcolor,width:30,height:30,borderRadius:15,alignItems:'center',justifyContent:'center'}}
                         />
                     <Text style={styles.headitemtext}>{this.props.name}</Text>
                 </View>
@@ -191,20 +191,29 @@ var createGuess = (obj,i) => <GuessStyle key={i} title={obj.title} intro={obj.in
 
 var layoutTest03 = React.createClass({
 
+    presscq:function(){
+        console.log('press cq');
+
+    },
+
     render: function() {
+
         return (
             <ScrollView style={[styles.scrollview,]}>
                 <View style={{flex:1,paddingTop:20,backgroundColor:'#f0efed'}}>
                     <View style={[styles.mtsearch,styles.mtrow,{alignItems:'center'}]}>
-                        <View style={[{width:70,alignItems:'center',flexDirection:'row',marginLeft:10,},]}>
-                            <Text style={[styles.font18,{color:'white'}]}>重庆</Text>
-                            <Icon
-                                name='ion|chevron-down'
-                                size={10}
-                                color='white'
-                                style={{width:10,height:10,marginLeft:5}}
-                                />
-                        </View>
+                        <TouchableOpacity onPress={()=>this.presscq()}>
+                            <View style={[{width:70,alignItems:'center',flexDirection:'row',marginLeft:10,},]}>
+                                <Text style={[styles.font18,{color:'white'}]}>重庆</Text>
+                                <Icon
+                                    name='ion|chevron-down'
+                                    size={10}
+                                    color='white'
+                                    style={{width:10,height:10,marginLeft:5}}
+                                    />
+                            </View>
+                        </TouchableOpacity>
+
                         <View style={[styles.mtflexone,{backgroundColor:'#68dbce',height:30,borderRadius:5,justifyContent:'center',}]}>
                             <TextInput
                                 autoCapitalize="words"
