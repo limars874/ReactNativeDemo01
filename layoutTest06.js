@@ -22,6 +22,7 @@ var {
     Image,
     ScrollView,
     TouchableOpacity,
+    Navigator,
     } = React;
 
 
@@ -45,20 +46,17 @@ var lowpriceitem = [
 
 
 
-
-
-var layoutTest06 = React.createClass({
-
-    presscq:function(){
-        console.log('press cq');
+var SmallFoodView = React.createClass({
+    goback(){
+        this.props.navigator.push({name:"allfood"})
 
     },
 
-    render: function() {
-
-        return (
+    render(){
+        return(
             <ScrollView style={[styles.scrollview,]}>
                 <View style={{flex:1,paddingTop:20,backgroundColor:'#f0efed'}}>
+
                     <View style={[styles.mtsearch,styles.mtrow,{alignItems:'center',backgroundColor:'#68dbce'}]}>
                         <TouchableOpacity onPress={()=>this.presscq()}>
                             <View style={[{width:50,alignItems:'center',flexDirection:'row',marginLeft:10,},]}>
@@ -70,6 +68,7 @@ var layoutTest06 = React.createClass({
                                     />
                             </View>
                         </TouchableOpacity>
+
 
                         <View style={[styles.mtflexone,styles.mtcenter]}>
                             <Text style={[styles.white,styles.font18]}>低价超值</Text>
@@ -86,12 +85,18 @@ var layoutTest06 = React.createClass({
                     </View>
 
                     <View style={[styles.tabbar,styles.mtrow,styles.mtcenter,{backgroundColor:'white'}]}>
-                        <View style={[styles.mtcenter,styles.mtflexone,{borderRightWidth:1,borderRightColor:'f0efed'}]}>
-                            <Text>全部</Text>
-                        </View>
-                        <View style={[styles.mtcenter,styles.mtflexone,{borderRightWidth:1,borderRightColor:'f0efed'}]}>
-                            <Text>小吃快餐</Text>
-                        </View>
+                        <TouchableOpacity onPress={()=>this.goback()} style={[styles.mtcenter,styles.mtflexone,{borderRightWidth:1,borderRightColor:'f0efed',}]}>
+                            <View >
+                                <Text>全部</Text>
+                            </View>
+                        </TouchableOpacity>
+
+                        <TouchableOpacity style={[styles.mtcenter,styles.mtflexone,{borderRightWidth:1,borderRightColor:'f0efed',borderBottomWidth:2,borderBottomColor:'red',paddingBottom:10}]}>
+                            <View >
+                                <Text>小吃快餐</Text>
+                            </View>
+                        </TouchableOpacity>
+
                         <View style={[styles.mtcenter,styles.mtflexone,{borderRightWidth:1,borderRightColor:'f0efed'}]}>
                             <Text>蛋糕甜点</Text>
                         </View>
@@ -103,33 +108,152 @@ var layoutTest06 = React.createClass({
                         </View>
                     </View>
 
-                    <View style={[styles.item,styles.mtcenter,{backgroundColor:'white',marginTop:10}]}>
-                        <Image style={[styles.img,]} source={{uri:'http://p0.meituan.net/122.74/deal/ccc7eebec29c11e0b6bc44029b3ba457245092.jpg'}}></Image>
-                        <View style={[styles.title,{marginBottom:5,marginTop:5,}]}><Text>[90件包邮] 利铺面...</Text></View>
-                        <View style={[styles.mtrow]}>
-                            <Text style={[styles.green,{fontWeight:'bold',fontSize:20}]}>0.98</Text>
-                            <Text style={[styles.green,{marginTop:8},styles.font12]}>元</Text>
-                            <Text style={[{fontSize:10,marginTop:10,marginLeft:5,textDecorationLine:'line-through'}]}>4.98元</Text>
-                            <Text style={[{fontSize:12,marginTop:10,marginLeft:5,color:'red'}]}>3.9分</Text>
+                    <View style={[styles.mtrow,{width:screenW,flexWrap:'wrap',justifyContent:'center'}]}>
+                        <View style={[styles.item,{margin:10,backgroundColor:'white',alignItems:'center'}]}>
+                            <Image style={[styles.img,]} source={{uri:'http://p0.meituan.net/122.74/deal/ccc7eebec29c11e0b6bc44029b3ba457245092.jpg'}}></Image>
+                            <View style={[styles.title,{marginBottom:5,marginTop:5,}]}><Text>[90件包邮] 利铺面...</Text></View>
+                            <View style={[styles.mtrow]}>
+                                <Text style={[styles.green,{fontWeight:'bold',fontSize:20}]}>0.98</Text>
+                                <Text style={[styles.green,{marginTop:8},styles.font12]}>元</Text>
+                                <Text style={[{fontSize:10,marginTop:10,marginLeft:5,textDecorationLine:'line-through'}]}>4.98元</Text>
+                                <Text style={[{fontSize:12,marginTop:10,marginLeft:5,color:'red'}]}>3.9分</Text>
+                            </View>
+                        </View>
+                    </View>
+                </View>
+            </ScrollView>
+        )
+
+    }
+
+});
+
+var AllFoodView = React.createClass({
+    goback(){
+        this.props.navigator.push({name:"smallfood"})
+    },
+
+    render(){
+        return(
+
+            <ScrollView style={[styles.scrollview,]}>
+                <View style={{flex:1,paddingTop:20,backgroundColor:'#f0efed'}}>
+
+                    <View style={[styles.mtsearch,styles.mtrow,{alignItems:'center',backgroundColor:'#68dbce'}]}>
+                        <TouchableOpacity onPress={()=>this.presscq()}>
+                            <View style={[{width:50,alignItems:'center',flexDirection:'row',marginLeft:10,},]}>
+                                <Icon
+                                    name='ion|android-arrow-back'
+                                    size={30}
+                                    color='white'
+                                    style={{width:30,height:30}}
+                                    />
+                            </View>
+                        </TouchableOpacity>
+
+
+                        <View style={[styles.mtflexone,styles.mtcenter]}>
+                            <Text style={[styles.white,styles.font18]}>低价超值</Text>
+                        </View>
+                        <View style={[{width:50,alignItems:'center'},]}>
+                            <Icon
+                                name='ion|ios-search'
+                                size={25}
+                                color='white'
+                                style={{width:25,height:25}}
+                                />
+                            <Text style={{color:'white',fontSize:10,fontWeight:'bold'}}>搜索</Text>
                         </View>
                     </View>
 
+                    <View style={[styles.tabbar,styles.mtrow,styles.mtcenter,{backgroundColor:'white'}]}>
+                        <TouchableOpacity style={[styles.mtcenter,styles.mtflexone,{borderRightWidth:1,borderRightColor:'f0efed',borderBottomWidth:2,borderBottomColor:'red',paddingBottom:10}]}>
+                            <View >
+                                <Text>全部</Text>
+                            </View>
+                        </TouchableOpacity>
+                        <TouchableOpacity onPress={()=>this.goback()}  style={[styles.mtcenter,styles.mtflexone,{borderRightWidth:1,borderRightColor:'f0efed'}]}>
+                            <View >
+                                <Text>小吃快餐</Text>
+                            </View>
+                        </TouchableOpacity>
 
+                        <View style={[styles.mtcenter,styles.mtflexone,{borderRightWidth:1,borderRightColor:'f0efed'}]}>
+                            <Text>蛋糕甜点</Text>
+                        </View>
+                        <View style={[styles.mtcenter,styles.mtflexone,{borderRightWidth:1,borderRightColor:'f0efed'}]}>
+                            <Text>KTV</Text>
+                        </View>
+                        <View style={[styles.mtcenter,styles.mtflexone,{borderRightWidth:1,borderRightColor:'f0efed'}]}>
+                            <Text>丽人</Text>
+                        </View>
+                    </View>
 
-
-
-
-
-
-
-
-
+                    <View style={[styles.mtrow,{width:screenW,flexWrap:'wrap',justifyContent:'center'}]}>
+                        <View style={[styles.item,{margin:10,backgroundColor:'white',alignItems:'center'}]}>
+                            <Image style={[styles.img,]} source={{uri:'http://p0.meituan.net/122.74/deal/7202a6486c94a4d9c0d952ee02a27f80266802.jpg'}}></Image>
+                            <View style={[styles.title,{marginBottom:5,marginTop:5,}]}><Text>[80件包邮] 利铺面...</Text></View>
+                            <View style={[styles.mtrow]}>
+                                <Text style={[styles.green,{fontWeight:'bold',fontSize:20}]}>0.48</Text>
+                                <Text style={[styles.green,{marginTop:8},styles.font12]}>元</Text>
+                                <Text style={[{fontSize:10,marginTop:10,marginLeft:5,textDecorationLine:'line-through'}]}>1.48元</Text>
+                                <Text style={[{fontSize:12,marginTop:10,marginLeft:5,color:'red'}]}>3.7分</Text>
+                            </View>
+                        </View>
+                    </View>
                 </View>
             </ScrollView>
+        )
 
+    }
+
+});
+
+
+
+
+var layoutTest06 = React.createClass({
+
+    configureScene(route){
+        return Navigator.SceneConfigs.FadeAndroid;
+
+    },
+
+    renderScene(router,navigator){
+        var Component =null;
+        this._navigator = navigator;
+        switch(router.name){
+            case "allfood":
+                Component = AllFoodView;
+                break;
+            case "smallfood":
+                Component = SmallFoodView;
+                break;
+            default :
+                Component = AllFoodView;
+
+        }
+
+        return <Component navigator={navigator} />
+
+    },
+
+
+
+
+    render: function() {
+
+        return (
+            <Navigator
+                initialRoute={{name:'allfood'}}
+                configureScene={this.configureScene}
+                renderScene={(router,navigator)=>this.renderScene(router,navigator)}
+
+                />
         );
     }
 });
+
 
 var styles = StyleSheet.create({
     mtflexone: {
@@ -208,6 +332,7 @@ var styles = StyleSheet.create({
     title:{
         backgroundColor:'white',
     },
+
 
 });
 
