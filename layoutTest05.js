@@ -164,14 +164,14 @@ var GuessStyle = React.createClass({
                         </View>
                         <View style={[styles.mtcolumn,{flex:1,height:100,justifyContent:'space-between'}]}>
                             <Text style={[styles.guesstext,{marginTop:5}]}>{this.props.title}</Text>
-                            <Text style={[styles.font12,styles.guesstext,{marginTop:5,}]}>{this.props.intro}</Text>
+                            <Text style={[styles.font12,styles.guesstext,{marginTop:5,}]}>{this.props.cata}</Text>
                             <View style={[styles.guesstext,styles.mtrow,{justifyContent:'space-between'}]}>
                                 <View style={styles.mtrow}>
                                     <Text style={[styles.font18,{color:'#06c1ae'}]}>{this.props.price}</Text>
                                     <Text style={[styles.font12,{color:'#06c1ae',marginTop:8}]}>元</Text>
                                     <Text style={[styles.font12,{color:'#f90',marginTop:5,marginLeft:5,borderWidth:1,borderColor:'#f90'}]}>{this.props.special}</Text>
                                 </View>
-                                <Text style={[styles.font12,{marginRight:5,marginTop:5}]}>已售{this.props.sales}</Text>
+                                <Text style={[styles.font12,{marginRight:5,marginTop:5}]}>已售{this.props.score}</Text>
                             </View>
                         </View>
                     </View>
@@ -184,7 +184,7 @@ var GuessStyle = React.createClass({
 
 var createItem1 = (obj,i) => <ListItemStyle1 key={i} name={obj.name} iconname={obj.iconname} imgurl={obj.imgurl} iconbackcolor={obj.iconbackcolor} />;
 var createItem2 = (obj,i) => <ListItemStyle2 key={i} bigname={obj.bigname} smallname={obj.smallname} imgurl={obj.imgurl} />;
-var createGuess = (obj,i) => <GuessStyle key={i} title={obj.title} intro={obj.intro} price={obj.price} special={obj.special} sales={obj.sales} imgurl={obj.imgurl} />;
+var createGuess = (obj,i) => <GuessStyle key={i} title={obj.title} intro={obj.cata} price={obj.price} special={obj.special} sales={obj.score} imgurl={obj.imgurl} />;
 
 
 
