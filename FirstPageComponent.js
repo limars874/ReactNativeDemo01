@@ -20,6 +20,7 @@ var layoutTest03 = require('./layoutTest03');
 var layoutTest04 = require('./layoutTest04');
 var layoutTest05 = require('./layoutTest05');
 var layoutTest06 = require('./layoutTest06');
+import layoutTest07 from './layoutTest07.js';
 
 
 var FirstPageComponent = React.createClass({
@@ -103,6 +104,16 @@ var FirstPageComponent = React.createClass({
             })
         }
     },
+    _pressButton7: function() {
+        const { navigator } = this.props;
+
+        if(navigator) {
+            navigator.push({
+                name: 'layoutTest07',
+                component: layoutTest07,
+            })
+        }
+    },
 
     render: function() {
         return (
@@ -140,6 +151,11 @@ var FirstPageComponent = React.createClass({
                 <View style ={styles.base}>
                     <TouchableOpacity onPress={this._pressButton6}>
                         <Text style = {styles.mybutton}>点我跳转布局测试6</Text>
+                    </TouchableOpacity>
+                </View>
+                <View style ={styles.base}>
+                    <TouchableOpacity onPress={this._pressButton7}>
+                        <Text style = {styles.mybutton}>点我跳转布局测试7</Text>
                     </TouchableOpacity>
                 </View>
 
