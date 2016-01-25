@@ -68,7 +68,7 @@ var ListItemStyle2 = React.createClass({
 
 var exampleimg = {uri:'http://ms0.meituan.net/touch/img/icon-sm.png'};
 
-var layoutTest03 = React.createClass({
+var layoutTest04 = React.createClass({
 
     render: function() {
         return (
@@ -251,4 +251,4 @@ var styles = StyleSheet.create({
 
 })
 
-module.exports = layoutTest03;
+module.exports = layoutTest04;

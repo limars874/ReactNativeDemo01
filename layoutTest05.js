@@ -33,6 +33,8 @@ var React = require('react-native');
 var Dimensions = require('Dimensions');
 var {Icon,} = require('react-native-icons');
 
+var layoutTest06 = require('./layoutTest06');
+
 var {
     View,
     Text,
@@ -189,10 +191,22 @@ var createGuess = (obj,i) => <GuessStyle key={i} title={obj.title} intro={obj.ca
 
 
 
-var layoutTest03 = React.createClass({
+var layoutTest05 = React.createClass({
 
     presscq:function(){
         console.log('press cq');
+
+    },
+
+    jumptest06:function(){
+        const { navigator } = this.props;
+
+        if(navigator) {
+            navigator.push({
+                name: 'layoutTest06',
+                component: layoutTest06,
+            })
+        }
 
     },
 
@@ -287,10 +301,13 @@ var layoutTest03 = React.createClass({
                             <Text style={styles.font14}>   猜你喜欢</Text>
                         </View>
                         {guessitem.map(createGuess)}
-                        <View style={[styles.guesslikeitem,styles.mtrow,{justifyContent:'space-between',alignItems:'center'}]} >
-                            <Text style={[styles.font14,{color:'#06c1ae'}]}>   查看全部团购</Text>
-                            <Text style={[styles.font18,{color:'#06c1ae',marginRight:10}]}>></Text>
-                        </View>
+                        <TouchableOpacity
+                            onPress = {()=>this.jumptest06()}>
+                            <View style={[styles.guesslikeitem,styles.mtrow,{justifyContent:'space-between',alignItems:'center'}]} >
+                                <Text style={[styles.font14,{color:'#06c1ae'}]}>   查看全部团购</Text>
+                                <Text style={[styles.font18,{color:'#06c1ae',marginRight:10}]}>></Text>
+                            </View>
+                        </TouchableOpacity>
                     </View>
 
 
@@ -448,4 +465,4 @@ var styles = StyleSheet.create({
 
 });
 
-module.exports = layoutTest03;
+module.exports = layoutTest05;

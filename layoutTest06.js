@@ -125,6 +125,14 @@ var layoutTest06 = React.createClass({
         this.setState({showborder:0})
     },
 
+    gobackButton: function() {
+        const { navigator } = this.props;
+        if(navigator) {
+
+            navigator.pop();
+        }
+    },
+
 
     render: function() {
 
@@ -133,7 +141,7 @@ var layoutTest06 = React.createClass({
                 <View style={{flex:1,paddingTop:20,backgroundColor:'#f0efed'}}>
 
                     <View style={[styles.mtsearch,styles.mtrow,{alignItems:'center',backgroundColor:'#68dbce'}]}>
-                        <TouchableOpacity >
+                        <TouchableOpacity onPress={()=>this.gobackButton()} >
                             <View style={[{width:50,alignItems:'center',flexDirection:'row',marginLeft:10,},]}>
                                 <Icon
                                     name='ion|android-arrow-back'
