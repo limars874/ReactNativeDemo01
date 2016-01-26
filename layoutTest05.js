@@ -146,6 +146,7 @@ var ListItemStyle2 = React.createClass({
     }
 });
 
+
 var GuessStyle = React.createClass({
 
     pressonguess:function(title){
