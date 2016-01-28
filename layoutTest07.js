@@ -5,7 +5,7 @@
  我之前用的是es5的写法，抄到官网指南又是es6的，所以会有点混乱。
 
  继续研究 listview，这次主要是this的作用域问题，首先，这是es6的写法，之前用es5写，先写好renderRow={this.renderMovie)},然后在renderMovie里面触发pressme的回调函数，回调函数里面的this会默认绑定为最外围的（这里也就是layoutTest07）的作用域，我们可以直接在下面写pressme方法，回调函数是可以直接调用的。
- 而现在es6默认this都是自己函数作用域的，比如这里如果不改代码，renderMovie里面的this是找不到pressme函数的（因为是在外面的），所以需要手动把外围的this作用域给绑定到renderMovie里面去，代码为renderRow={this.renderMovie.bind(this)}。这样才能正常操作。
+ 而现在es6默认this都是自己函数作用域的，比如这里如果不改代码，renderMovie里面的this是找不到pressme函数的（因为是在外面的），所以需要手动把外围的this作用域给绑定到renderMovie里面去，代码为renderRow={this.renderMovie.bind(this)}。或者renderRow={e=>this.renderMovie(e)}也可以，这样才能正常操作。
  同理，如果想在pressme里面调用外围（layoutTest07）的this.props的navigator属性，那么必须要先绑一下：this.pressme = this.pressme.bind(this)，不绑的话，pressme里面的props也没东西。
 
 
@@ -79,15 +79,11 @@ export default class layoutTest07 extends Component{
         }
 
         return (
-            <View>
-
-                <Text>Cala me back</Text>
                 <ListView
                     dataSource={this.state.dataSource}
-                    renderRow={this.renderMovie.bind(this)}
+                    renderRow={e=>this.renderMovie(e)}
                     contentContainerStyle={styles.listView}
                     />
-            </View>
         );
     }
 

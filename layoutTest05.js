@@ -20,9 +20,13 @@
  />
  style里面必须给尺寸，否则什么都显示不出来，style相当于是背景，可以使用JSX属性修改颜色形状等
 
- 测试onpress属性以及相关回调函数的使用，还有和TouchableOpacity组件调用（其实如果不是需要点击画面效果可以不要）
+ 测试onpress属性以及相关回调函数的使用，还有和TouchableOpacity组件调用
  createClass新建的组件名称首字母一定要大写。
 
+ 准备制作动画，先看例子，例子里面有个关于props传递内容的tips，就是在嵌套组件使用时，组件本身的内容：比如<component>内容</compoent>，可以在定义组件的时候，用{this.props.children}的方式把内容给传进来。
+ 最简单的位移动画，首先初始化一个位移属性，leftx:new Animated.Value(0) （必须是这个new Animated.Value(0),否则会报错 Unhandled JS Exception: singleValue.stopTracking is not a function.
+ 然后给按钮回调函数写动画Animated.spring(this.state.leftx,{toValue:-screenW,}).start();
+ 然后把要动画的view改成Animated.View组件标签，style里面把leftx到值赋值给left位移属性，就可以了。
 
  **/
 
@@ -43,6 +47,7 @@ var {
     Image,
     ScrollView,
     TouchableOpacity,
+    Animated,
     } = React;
 
 
@@ -194,8 +199,37 @@ var createGuess = (obj,i) => <GuessStyle key={i} title={obj.title} intro={obj.ca
 
 var layoutTest05 = React.createClass({
 
+    getInitialState(){
+        return{
+            leftx:new Animated.Value(0),
+        };
+    },
+
     presscq:function(){
-        console.log('press cq');
+        console.log(this.state.leftx._value);
+        if(this.state.leftx._value <= 0 &&  this.state.leftx._value >= -200){
+            Animated.spring(
+                this.state.leftx,
+                {
+                    toValue:-screenW,
+                    friction:7,
+                    tension:10,
+
+                }
+            ).start();
+
+        }else if (this.state.leftx._value >= -screenW && this.state.leftx._value <= -screenW+200 ){
+            Animated.spring(
+                this.state.leftx,
+                {
+                    toValue:0,
+                    friction:7,
+                    tension:10,
+
+                }
+            ).start();
+        }
+
 
     },
 
@@ -246,9 +280,9 @@ var layoutTest05 = React.createClass({
                         </View>
                     </View>
 
-                    <View style={[styles.mthead,styles.mtrow,{flexWrap:'wrap',width:screenW*2}]}>
+                    <Animated.View  style={[styles.mthead,styles.mtrow,{flexWrap:'wrap',width:screenW*2,left:this.state.leftx,}]}>
                         {ItemData1.map(createItem1)}
-                    </View>
+                    </Animated.View >
 
 
 
@@ -265,7 +299,7 @@ var layoutTest05 = React.createClass({
 
                         <View style={[styles.midright,styles.mtcolumn,]}>
                             <TouchableOpacity
-                                onPress = {()=>console.log('click is ok')}>
+                                onPress = {()=>this.presscq()}>
                                 <View style={[styles.headitem,styles.mtrow,styles.borderl,styles.borderb]}>
                                     <View style={styles.headitem}>
                                         <Text style={[styles.textcenter,styles.font18,styles.orangefont]}>低价超值</Text>
