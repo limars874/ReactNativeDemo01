@@ -28,6 +28,7 @@
  然后给按钮回调函数写动画Animated.spring(this.state.leftx,{toValue:-screenW,}).start();
  然后把要动画的view改成Animated.View组件标签，style里面把leftx到值赋值给left位移属性，就可以了。
 
+ 设置横移动画下面到小圆点到显示，设置一个state来切换就行了，目前就只做了2个点的，3个点或者以上的代码就没那么简单了。
  **/
 
 
@@ -202,11 +203,14 @@ var layoutTest05 = React.createClass({
     getInitialState(){
         return{
             leftx:new Animated.Value(0),
+            pointOn:0,
         };
     },
 
+
+
+
     presscq:function(){
-        console.log(this.state.leftx._value);
         if(this.state.leftx._value <= 0 &&  this.state.leftx._value >= -200){
             Animated.spring(
                 this.state.leftx,
@@ -217,6 +221,7 @@ var layoutTest05 = React.createClass({
 
                 }
             ).start();
+            this.setState({pointOn:1});
 
         }else if (this.state.leftx._value >= -screenW && this.state.leftx._value <= -screenW+200 ){
             Animated.spring(
@@ -228,6 +233,7 @@ var layoutTest05 = React.createClass({
 
                 }
             ).start();
+            this.setState({pointOn:0});
         }
 
 
@@ -283,6 +289,11 @@ var layoutTest05 = React.createClass({
                     <Animated.View  style={[styles.mthead,styles.mtrow,{flexWrap:'wrap',width:screenW*2,left:this.state.leftx,}]}>
                         {ItemData1.map(createItem1)}
                     </Animated.View >
+
+                    <View style={[styles.mtrow,{backgroundColor:'white',marginBottom: 10,alignItems:'center',justifyContent:'center',height:20}]}>
+                        <View style={[this.state.pointOn==0?styles.greenpoint:styles.graypoint]}></View>
+                        <View style={[this.state.pointOn==1?styles.greenpoint:styles.graypoint]}></View>
+                    </View>
 
 
 
@@ -369,7 +380,7 @@ var styles = StyleSheet.create({
     mthead: {
         backgroundColor: 'white',
         height: 160,
-        marginBottom: 10,
+
     },
     mtcolumn: {
         flexDirection: 'column',
@@ -496,6 +507,26 @@ var styles = StyleSheet.create({
 
         marginLeft:10,
     },
+
+    greenpoint:{
+        width:10,
+        height:10,
+        backgroundColor:'#06c1ae',
+        borderRadius:5,
+        marginLeft:10,
+        marginRight:10,
+
+    },
+    graypoint:{
+        width:10,
+        height:10,
+        backgroundColor:'#F0EFED',
+        borderRadius:5,
+        marginLeft:10,
+        marginRight:10,
+
+    },
+
 
 
 });
