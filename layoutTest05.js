@@ -29,6 +29,15 @@
  然后把要动画的view改成Animated.View组件标签，style里面把leftx到值赋值给left位移属性，就可以了。
 
  设置横移动画下面到小圆点到显示，设置一个state来切换就行了，目前就只做了2个点的，3个点或者以上的代码就没那么简单了。
+
+
+ 自己实现手势滑动的效果，需要使用panResponser组件，首先需要create一个响应对象，然后实现里面标配的一些方法（onStartShouldSetPanResponder,onPanResponderGrant,onPanResponderMove,onPanResponderRelease等），然后把这个对象嵌到你想要响应的组件上（比如view什么上去）
+ 具体到我们这里，就是使用里面的Move方法计算手指横向滑动了多少距离来判断要不要滑动，往哪个方向滑动。然后在Release里面实现动画效果。
+ 大坑：我是在scrollview包裹的内容里面实现panResponder，一开始完全没反应。如果需要有反应， onMoveShouldSetPanResponderCapture: () => true,不拦截的话，触摸反应就丢给scroll去了。而且还只能拦截move，把onStart也拦截
+ 那里面的按钮都没法点了。
+ 实现了，但效果并不好，之后还是用第三方插件比较好，比如swiper（https://github.com/leecade/react-native-swiper）
+
+
  **/
 
 
@@ -49,6 +58,7 @@ var {
     ScrollView,
     TouchableOpacity,
     Animated,
+    PanResponder,
     } = React;
 
 
@@ -204,9 +214,56 @@ var layoutTest05 = React.createClass({
         return{
             leftx:new Animated.Value(0),
             pointOn:0,
+            scroll:true,
         };
     },
 
+
+    componentWillMount:function(){
+        this._handResponder = PanResponder.create({
+            onStartShouldSetResponder:()=>true,
+            onMoveShouldSetResponder: ()=> true,
+            onMoveShouldSetPanResponderCapture: () => true,
+            onPanResponderGrant:()=>{this.setState({scroll:true})},
+            onPanResponderMove:(evt,gs)=>{
+                if(gs.dx>=50){
+                    this.leftScroll();
+                }else if(gs.dx<=-50){
+                    this.rightScroll();
+                }else{
+                    return false
+                }
+            },
+            onPanResponderRelease:()=>{this.setState({scroll:true})},
+            onPanResponderTerminate:()=>{console.log('terminate')},
+
+        })
+
+    },
+    leftScroll:function(){
+        Animated.spring(
+            this.state.leftx,
+            {
+                toValue:-screenW,
+                friction:7,
+                tension:10,
+
+            }
+        ).start();
+        this.setState({pointOn:1});
+    },
+    rightScroll:function(){
+        Animated.spring(
+            this.state.leftx,
+            {
+                toValue:0,
+                friction:7,
+                tension:10,
+
+            }
+        ).start();
+        this.setState({pointOn:0});
+    },
 
 
 
@@ -254,7 +311,7 @@ var layoutTest05 = React.createClass({
     render: function() {
 
         return (
-            <ScrollView style={[styles.scrollview,]}>
+            <ScrollView scrollEnabled={this.state.scroll} style={[styles.scrollview,]}>
                 <View style={{flex:1,paddingTop:20,backgroundColor:'#f0efed'}}>
                     <View style={[styles.mtsearch,styles.mtrow,{alignItems:'center'}]}>
                         <TouchableOpacity onPress={()=>this.presscq()}>
@@ -286,7 +343,7 @@ var layoutTest05 = React.createClass({
                         </View>
                     </View>
 
-                    <Animated.View  style={[styles.mthead,styles.mtrow,{flexWrap:'wrap',width:screenW*2,left:this.state.leftx,}]}>
+                    <Animated.View  {...this._handResponder.panHandlers} style={[styles.mthead,styles.mtrow,{flexWrap:'wrap',width:screenW*2,left:this.state.leftx,}]}>
                         {ItemData1.map(createItem1)}
                     </Animated.View >
 

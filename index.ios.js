@@ -1,6 +1,12 @@
 /**
  * Sample React Native App
  * https://github.com/facebook/react-native
+ *
+ * 取消ios的右滑返回
+ * configureScene={() => {
+            return {...Navigator.SceneConfigs.VerticalDownSwipeJump,gestures:null}
+          }}
+ *
  */
 'use strict';
 
@@ -21,7 +27,7 @@ var MyProject = React.createClass({
             <Navigator
                 initialRoute={{ name: defaultName, component: defaultComponent }}
                 configureScene={() => {
-            return Navigator.SceneConfigs.VerticalDownSwipeJump;
+            return {...Navigator.SceneConfigs.VerticalDownSwipeJump,gestures:null}
           }}
                 renderScene={(route, navigator) => {
             let Component = route.component;
