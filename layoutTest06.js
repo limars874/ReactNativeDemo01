@@ -107,18 +107,22 @@ var layoutTest06 = React.createClass({
     fastfood(){
         this.setState({lowpricecata:1})
         this.setState({showborder:1})
+        this.props.updateChange(2);
     },
     sweetfood(){
         this.setState({lowpricecata:2})
         this.setState({showborder:2})
+        this.props.updateChange(3);
     },
     ktv(){
         this.setState({lowpricecata:3})
         this.setState({showborder:3})
+        this.props.updateChange(4);
     },
     girl(){
         this.setState({lowpricecata:4})
         this.setState({showborder:4})
+        this.props.updateChange(5);
     },
     all(){
         this.setState({lowpricecata:0})
@@ -137,6 +141,7 @@ var layoutTest06 = React.createClass({
     render: function() {
 
         return (
+
             <ScrollView style={[styles.scrollview,]}>
                 <View style={{flex:1,paddingTop:20,backgroundColor:'#f0efed'}}>
 

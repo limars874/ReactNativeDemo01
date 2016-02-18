@@ -54,10 +54,12 @@ export default class layoutTest07 extends Component{
         };
 
         this.pressme = this.pressme.bind(this);
+        this.pressme2 = this.pressme2.bind(this);
 
     }
 
     componentDidMount() {
+        console.log("sttt is "+this.props.sttt);
         this.fetchData();
     }
 
@@ -100,7 +102,7 @@ export default class layoutTest07 extends Component{
     renderMovie(movie) {
         return (
             <View style={[styles.container,styles.borderall]}>
-                <TouchableOpacity onPress={this.pressme} >
+                <TouchableOpacity onPress={this.pressme2} >
                     <Image
                         source={{uri: movie.posters.thumbnail}}
                         style={styles.thumbnail}
@@ -125,6 +127,9 @@ export default class layoutTest07 extends Component{
                 component: layoutTest06,
             })
         }
+    }
+    pressme2(){
+        console.log("sttt is "+this.props.sttt);
     }
 
 

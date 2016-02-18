@@ -34,7 +34,7 @@
  自己实现手势滑动的效果，需要使用panResponser组件，首先需要create一个响应对象，然后实现里面标配的一些方法（onStartShouldSetPanResponder,onPanResponderGrant,onPanResponderMove,onPanResponderRelease等），然后把这个对象嵌到你想要响应的组件上（比如view什么上去）
  具体到我们这里，就是使用里面的Move方法计算手指横向滑动了多少距离来判断要不要滑动，往哪个方向滑动。然后在Release里面实现动画效果。
  大坑：我是在scrollview包裹的内容里面实现panResponder，一开始完全没反应。如果需要有反应， onMoveShouldSetPanResponderCapture: () => true,不拦截的话，触摸反应就丢给scroll去了。而且还只能拦截move，把onStart也拦截
- 那里面的按钮都没法点了。
+ 那里面的按钮都没法点了。然后最好在滑动的时候，把scrollview的上下滚动功能给停掉，滑完了再设置回来。
  实现了，但效果并不好，之后还是用第三方插件比较好，比如swiper（https://github.com/leecade/react-native-swiper）
 
 
@@ -205,10 +205,11 @@ var createItem1 = (obj,i) => <ListItemStyle1 key={i} name={obj.name} iconname={o
 var createItem2 = (obj,i) => <ListItemStyle2 key={i} bigname={obj.bigname} smallname={obj.smallname} imgurl={obj.imgurl} />;
 var createGuess = (obj,i) => <GuessStyle key={i} title={obj.title} intro={obj.cata} price={obj.price} special={obj.special} sales={obj.score} imgurl={obj.imgurl} />;
 
-
+var icon = require('./img/friend.png');
 
 
 var layoutTest05 = React.createClass({
+
 
     getInitialState(){
         return{
@@ -224,7 +225,7 @@ var layoutTest05 = React.createClass({
             onStartShouldSetResponder:()=>true,
             onMoveShouldSetResponder: ()=> true,
             onMoveShouldSetPanResponderCapture: () => true,
-            onPanResponderGrant:()=>{this.setState({scroll:true})},
+            onPanResponderGrant:()=>{this.setState({scroll:false})},
             onPanResponderMove:(evt,gs)=>{
                 if(gs.dx>=50){
                     this.leftScroll();
@@ -360,7 +361,7 @@ var layoutTest05 = React.createClass({
                             <View style={styles.headitem}>
                                 <Text style={[styles.textcenter,styles.font18,styles.greenfont]}>我们约吧</Text>
                                 <Text style={styles.textcenter}>恋人家人好朋友</Text>
-                                <Image style={[styles.midleftimg,]} source={{uri:'http://p0.meituan.net/mmc/fe4d2e89827aa829e12e2557ded363a112289.png'}}></Image>
+                                <Image style={[styles.midleftimg,]} source={icon}></Image>
 
                             </View>
                         </View>
