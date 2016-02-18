@@ -81,11 +81,14 @@ export default class layoutTest07 extends Component{
         }
 
         return (
+            <View>
                 <ListView
                     dataSource={this.state.dataSource}
                     renderRow={e=>this.renderMovie(e)}
                     contentContainerStyle={styles.listView}
                     />
+                <Text>{this.props.sttt}</Text>
+            </View>
         );
     }
 
@@ -112,6 +115,7 @@ export default class layoutTest07 extends Component{
                     </View>
                     <View style={styles.rightContainer}>
                         <Text style={styles.year}>{movie.year}</Text>
+
                     </View>
                 </TouchableOpacity>
             </View>

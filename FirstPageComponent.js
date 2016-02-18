@@ -20,6 +20,7 @@ var layoutTest03 = require('./layoutTest03');
 var layoutTest04 = require('./layoutTest04');
 var layoutTest05 = require('./layoutTest05');
 var layoutTest06 = require('./layoutTest06');
+
 import layoutTest07 from './layoutTest07.js';
 import layoutTest08 from './layoutTest08.js';
 
@@ -175,6 +176,7 @@ var FirstPageComponent = React.createClass({
                         <Text style = {styles.mybutton}>点我跳转布局测试8</Text>
                     </TouchableOpacity>
                 </View>
+
 
             </View>
 
