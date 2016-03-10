@@ -30,8 +30,7 @@ var FirstPageComponent = React.createClass({
         return {};
     },
 
-    componentDidMount: function() {
-    },
+
 
     _pressButton: function() {
         const { navigator } = this.props;
@@ -127,6 +126,46 @@ var FirstPageComponent = React.createClass({
             })
         }
     },
+
+
+    componentWillMount: function(){
+        console.log('first componentWillMount is here');
+
+    },
+
+    componentDidMount: function() {
+        console.log('first componentDidMount is here');
+    },
+
+    componentWillReceiveProps:function(nextprops){
+        console.log('first componentWillReceiveProps is here');
+
+    },
+
+    shouldComponentUpdate:function(){
+        console.log('first shouldComponentUpdate is here');
+        return true;
+    },
+
+    componentWillUpdate:function(){
+        console.log('first componentWillUpdate is here');
+
+    },
+
+    componentDidUpdate:function(){
+        console.log('first componentDidUpdate is here');
+
+    },
+
+    componentWillUnmount:function(){
+        console.log('first componentWillUnmount is here');
+
+    },
+
+
+
+
+
 
     render: function() {
         return (

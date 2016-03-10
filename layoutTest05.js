@@ -128,7 +128,7 @@ var ListItemStyle1 = React.createClass({
                         name={this.props.iconname}
                         size={25}
                         color='white'
-                        style={{backgroundColor:this.props.iconbackcolor,width:30,height:30,borderRadius:15,alignItems:'center',justifyContent:'center'}}
+                        style={{backgroundColor:this.props.iconbackcolor,width:30,height:30,borderRadius:15,alignItems:'center',justifyContent:'center',borderWidth:3,borderColor:"gray"}}
                         />
                     <Text style={styles.headitemtext}>{this.props.name}</Text>
                 </View>

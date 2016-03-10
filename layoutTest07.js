@@ -51,6 +51,7 @@ export default class layoutTest07 extends Component{
                 rowHasChanged: (row1, row2) => row1 !== row2,
             }),
             loaded: false,
+            showpic:true,
         };
 
         this.pressme = this.pressme.bind(this);
@@ -59,13 +60,15 @@ export default class layoutTest07 extends Component{
     }
 
     componentDidMount() {
-        console.log("sttt is "+this.props.sttt);
         this.fetchData();
     }
 
     fetchData() {
         fetch(REQUEST_URL)
-            .then((response) => response.json())
+            .then((response) => {
+
+                return response.json();
+            })
             .then((responseData) => {
                 this.setState({
                     dataSource: this.state.dataSource.cloneWithRows(responseData.movies),
@@ -76,20 +79,50 @@ export default class layoutTest07 extends Component{
     }
 
     render() {
+        console.log(this.state.showpic);
+
         if (!this.state.loaded) {
             return this.renderLoadingView();
         }
 
-        return (
-            <View>
-                <ListView
-                    dataSource={this.state.dataSource}
-                    renderRow={e=>this.renderMovie(e)}
-                    contentContainerStyle={styles.listView}
-                    />
-                <Text>{this.props.sttt}</Text>
-            </View>
-        );
+        if (this.state.showpic){
+            return (
+                <View style={{flex:1}}>
+                    <TouchableOpacity onPress={()=>{this.setState({showpic:!this.state.showpic});this.fetchData();}}>
+                        <Text style={{marginTop:30, borderWidth:2,borderColor:'green'}}>
+                            press me , showpic is {this.state.showpic?'true':'false'}
+                        </Text>
+                    </TouchableOpacity>
+
+                    <ListView
+                        dataSource={this.state.dataSource}
+                        renderRow={e=>this.renderMovie(e)}
+                        contentContainerStyle={styles.listView}
+                        />
+                </View>
+
+            );
+
+        }else{
+            return (
+                <View style={{flex:1}}>
+                    <TouchableOpacity onPress={()=>{this.setState({showpic:!this.state.showpic});this.fetchData();}}>
+                        <Text style={{marginTop:30, borderWidth:2,borderColor:'green'}}>
+                            press me , showpic is {this.state.showpic?'true':'false'}
+                        </Text>
+                    </TouchableOpacity>
+
+                    <ListView
+                        dataSource={this.state.dataSource}
+                        renderRow={e=>this._renderMovie(e)}
+                        contentContainerStyle={styles.listView}
+                        />
+                </View>
+            );
+
+        }
+
+
     }
 
     renderLoadingView() {
@@ -115,6 +148,25 @@ export default class layoutTest07 extends Component{
                     </View>
                     <View style={styles.rightContainer}>
                         <Text style={styles.year}>{movie.year}</Text>
+                        <Text>{this.props.sttt}</Text>
+
+                    </View>
+                </TouchableOpacity>
+            </View>
+        );
+    }
+
+    _renderMovie(movie) {
+        return (
+            <View style={[styles.container,styles.borderall]}>
+                <TouchableOpacity onPress={this.pressme2} >
+
+                    <View style={styles.rightContainer}>
+                        <Text style={styles.title}>{movie.title}</Text>
+                    </View>
+                    <View style={styles.rightContainer}>
+                        <Text style={styles.year}>{movie.year}</Text>
+                        <Text>{this.props.sttt}</Text>
 
                     </View>
                 </TouchableOpacity>

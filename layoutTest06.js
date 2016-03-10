@@ -97,6 +97,7 @@ var filterfood = function (cata) {
 
 var layoutTest06 = React.createClass({
     getInitialState(){
+        console.log('test 06 is init');
         return{
             lowpricecata:0,
             showborder:0
@@ -135,6 +136,41 @@ var layoutTest06 = React.createClass({
 
             navigator.pop();
         }
+    },
+
+
+    componentWillMount: function(){
+        console.log('test06 componentWillMount is here');
+
+    },
+
+    componentDidMount: function() {
+        console.log('test06 componentDidMount is here');
+    },
+
+    componentWillReceiveProps:function(nextprops){
+        console.log('test06 componentWillReceiveProps is here');
+
+    },
+
+    shouldComponentUpdate:function(){
+        console.log('test06 shouldComponentUpdate is here');
+        return true;
+    },
+
+    componentWillUpdate:function(){
+        console.log('test06 componentWillUpdate is here');
+
+    },
+
+    componentDidUpdate:function(){
+        console.log('test06 componentDidUpdate is here');
+
+    },
+
+    componentWillUnmount:function(){
+        console.log('test06 componentWillUnmount is here');
+
     },
 
 
